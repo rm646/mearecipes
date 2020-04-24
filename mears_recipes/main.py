@@ -74,6 +74,12 @@ def list_recipes():
         click.echo(f'{i}. {recipe.name}')
 
 @cli.command()
+@click.option('--index', '-i', required=True, type=int)
+def show_recipe(index):
+    recipe = get_recipe_names_from_file()[index]
+    print(recipe)
+
+@cli.command()
 def select_recipes():
     recipes = get_recipe_names_from_file()
     selected_recipe_numbers = get_recipe_numbers_from_user()

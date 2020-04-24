@@ -40,6 +40,5 @@ class Method:
     def __str__(self):
         method = ''
         step_list = [f'{step} {self.steps[step]}\n' for step in self.steps]
-        print(method.join(step_list))
         method = method.join(step_list)
         return method
