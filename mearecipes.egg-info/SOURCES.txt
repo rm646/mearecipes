@@ -1,0 +1,11 @@
+README.md
+setup.py
+mearecipes/__init__.py
+mearecipes/containers.py
+mearecipes/main.py
+mearecipes.egg-info/PKG-INFO
+mearecipes.egg-info/SOURCES.txt
+mearecipes.egg-info/dependency_links.txt
+mearecipes.egg-info/top_level.txt
+tests/__init__.py
+tests/test.py

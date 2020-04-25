@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: mearecipes
+Version: 0.0.1
+Summary: A small package to create shopping lists from selected recipes
+Home-page: https://github.com/rm646/mearecipes
+Author: Rudi Mears
+Author-email: rudi.mears@gmail.com
+License: UNKNOWN
+Description: # mears-recipes
+        I had a problem: I wanted to plan meals for the week, then go shopping. But
+        working out what I needed to buy given a number of recipes with some overlap
+        was tedious.
+        
+        This program tries to solve that problem by combining the ingredients of
+        selected recipes into a shopping list.
+        
+        View the available recipes with
+        ```bash
+        $ python mearecipes/main.py list
+        ```
+        
+        See a particular recipe's details with
+        ```bash
+        $ python mearecipes/main.py show -i <recipe_index>
+        ```
+        where <recipe_index> is the number from the list printed by the previous
+        command.
+        
+        Select recipes and print the resulting shopping list with
+        ```bash
+        $ python mearecipes/main.py shop
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

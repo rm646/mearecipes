@@ -8,5 +8,17 @@ selected recipes into a shopping list.
 
 View the available recipes with
 ```bash
+$ python mearecipes/main.py list
+```
 
+See a particular recipe's details with
+```bash
+$ python mearecipes/main.py show -i <recipe_index>
+```
+where <recipe_index> is the number from the list printed by the previous
+command.
+
+Select recipes and print the resulting shopping list with
+```bash
+$ python mearecipes/main.py shop
 ```
