@@ -1,3 +1,7 @@
+from astropy import units as u
+u.imperial.enable()
+
+
 class Recipe:
     def __init__(self, name, ingredients, method):
         self.name = name
@@ -16,21 +20,36 @@ class Recipe:
 
 
 class Ingredient:
-    def __init__(self, name, quantity):
+    def __init__(self, name, quantity_str):
         self.name = name
-        self.quantity = quantity
+        self.quantity = self._parse_quantity_str(quantity_str)
 
     def __str__(self):
         return str(self.quantity)+' '+str(self.name)
 
-    def combine_two(self, other_ingredient):
-        if (self.name != other_ingredient.name):
-            raise ValueError("Tried to combine different kinds of ingredient")
-        sum = self.quantity + other_ingredient.quantity
-        return Ingredient(self.name, sum)
-
     def to_dict(self):
-        return {'name': self.name, 'quantity': self.quantity}
+        return {self.name: self.quantity}
+
+    def _convert_to_float(self, value_str):
+        # handle fractions
+        if '/' in value_str and len(value_str) > 1:
+            fraction = value_str.split('/')
+            numerator = fraction[0]
+            denominator = fraction[1]
+            return float(numerator)/float(denominator)
+        else:
+            return float(value_str)
+
+    def _parse_quantity_str(self, quantity_str):
+        quantity_str = str(quantity_str)
+        try:
+            split_index = quantity_str.index(' ')
+            value = self._convert_to_float(quantity_str[:split_index])
+            unit = u.Unit(quantity_str[split_index+1:])
+        except ValueError:
+            value = self._convert_to_float(quantity_str)
+            unit = u.dimensionless_unscaled
+        return value*unit
 
 
 class Method:

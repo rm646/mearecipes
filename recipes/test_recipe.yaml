@@ -1,7 +1,5 @@
 ingredients:
-- name: potato
-  quantity: 1
-- name: tomato
-  quantity: 3
+  potato: 1
+  tomato: 3
 method: guesswork
 name: test_recipe

@@ -13,7 +13,7 @@ def load_recipe(recipe_path):
             print(exc)
     name = content['name']
     ingredients = [
-        Ingredient(x['name'], x['quantity']) for x in content['ingredients']
+        Ingredient(x, content['ingredients'][x]) for x in content['ingredients']
     ]
     method = Method(content['method'])
     return Recipe(name, ingredients, method)

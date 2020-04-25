@@ -1,33 +1,19 @@
 name: Chickpea stew
 ingredients:
-- name: chickpeas
-  quantity: 2
-- name: olive oil
-  quantity: 1
-- name: onion
-  quantity: 1
-- name: garlic
-  quantity: 2
-- name: red pepper
-  quantity: 1/4
-- name: tomato
-  quantity: 1
-- name: carrot
-  quantity: 1
-- name: parsley
-  quantity: 1
-- name: basil
-  quantity: 1/2
-- name: oregano
-  quantity: 1/2
-- name: tomato paste
-  quantity: 1
-- name: vegetable stock
-  quantity: 600
-- name: salt
-  quantity: 1/2
-- name: cayenne pepper
-  quantity: 1/4
+  can of chickpeas: 2
+  olive oil: 1 tbsp
+  onion: 1
+  garlic clove: 2
+  red pepper: 1/4 cup
+  tomato: 1
+  carrot: 1
+  dried parsley: 1 tsp
+  dried basil: 1/2 tsp
+  dried oregano: 1/2 tsp
+  tomato paste: 1 tbsp
+  vegetable stock: 2 cups
+  salt: 1/2 tsp
+  cayenne pepper: 1/4 tsp
 method:
   1: >
       If you are using dried chickpeas, sort, wash and soak them overnight.

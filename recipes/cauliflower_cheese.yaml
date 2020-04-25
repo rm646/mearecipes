@@ -1,17 +1,11 @@
 name: Cauliflower cheese
 ingredients:
-- name: large cauliflower
-  quantity: 1
-- name: milk
-  quantity: 500
-- name: flour
-  quantity: 4
-- name: butter
-  quantity: 50
-- name: strong cheddar
-  quantity: 100
-- name: breadcrumbs
-  quantity: 3
+  large cauliflower: 1
+  milk: 500 mL
+  flour: 4 tbsp
+  butter: 50 g
+  strong cheddar: 100 g
+  breadcrumbs: 3 tbsp
 method:
   1: >
       Bring a large saucepan of water to the boil, then add 1 large cauliflower,
