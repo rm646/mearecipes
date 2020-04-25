@@ -68,19 +68,19 @@ def cli(ctx):
         click.echo('Welcome to Mears recipes.')
 
 @cli.command()
-def list_recipes():
+def list():
     recipes = get_recipe_names_from_file()
     for i, recipe in enumerate(recipes):
         click.echo(f'{i}. {recipe.name}')
 
 @cli.command()
 @click.option('--index', '-i', required=True, type=int)
-def show_recipe(index):
+def show(index):
     recipe = get_recipe_names_from_file()[index]
     print(recipe)
 
 @cli.command()
-def select_recipes():
+def shop():
     recipes = get_recipe_names_from_file()
     selected_recipe_numbers = get_recipe_numbers_from_user()
     selected_recipes = [
@@ -97,7 +97,7 @@ def select_recipes():
     _ = [ingredients.extend(recipe.ingredients) for recipe in selected_recipes]
     simplified_ingredients = simplify_ingredients(ingredients)
     ingredients_str = '{:=^40}\n'.format('ALL INGREDIENTS')
-    for ingredient in ingredients:
+    for ingredient in simplified_ingredients:
         ingredients_str += f'\t- {str(ingredient)}\n'
     click.echo(ingredients_str)
 
