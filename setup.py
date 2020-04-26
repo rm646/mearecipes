@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="mearecipes",
-    version="0.0.1",
+    version="0.0.2",
     author="Rudi Mears",
     author_email="rudi.mears@gmail.com",
     description="A small package to create shopping lists from selected recipes",
