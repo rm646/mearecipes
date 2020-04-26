@@ -1,0 +1,3 @@
+[console_scripts]
+mearecipes = mearecipes.main:cli
+

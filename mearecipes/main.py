@@ -2,7 +2,8 @@ import click
 import glob
 from itertools import groupby
 import yaml
-from containers import Ingredient, Method, Recipe
+
+from mearecipes.containers import Ingredient, Method, Recipe
 
 
 def load_recipe(recipe_path):
@@ -101,6 +102,3 @@ def shop():
         ingredients_str += f'\t- {str(ingredient)}\n'
     click.echo(ingredients_str)
 
-
-if __name__ == '__main__':
-    cli()

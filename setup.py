@@ -18,5 +18,15 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points={
+        "console_scripts": [
+            "mearecipes = mearecipes.main:cli",
+        ],
+    },
+    install_requires=[
+        "click",
+	"astropy",
+	"pyyaml",
+    ],
     python_requires='>=3.6',
 )
