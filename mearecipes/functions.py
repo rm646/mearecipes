@@ -1,0 +1,62 @@
+import glob
+from itertools import groupby
+import yaml
+
+from mearecipes.containers import Ingredient, Method, Recipe
+
+
+def load_recipe(recipe_path):
+    with open(recipe_path, 'r') as f:
+        content = yaml.safe_load(f)
+
+    name = content['name']
+    ingredients = [
+        Ingredient(x, content['ingredients'][x]) for x in content['ingredients']
+    ]
+    method = Method(content['method'])
+    return Recipe(name, ingredients, method)
+
+
+def store_recipe(recipe):
+    with open(f'recipes/{recipe.name}.yaml', 'w') as f:
+        store_dict = {
+                'name': recipe.name,
+                'ingredients': [x.to_dict() for x in recipe.ingredients],
+                'method': recipe.method,
+        }
+        yaml.dump(store_dict, f, default_flow_style=False)
+
+
+def simplify_ingredients(ingredients):
+    get_name = lambda i : i.name
+    ingredients = sorted(ingredients, key=get_name)
+    simplified_ingredients = []
+    for name, group in groupby(ingredients, key=get_name):
+        quantities = [x.quantity for x in group]
+        simplified_ingredients.append(Ingredient(name, sum(quantities)))
+    return simplified_ingredients
+
+
+def get_recipe_numbers_from_user():
+    all_numbers = []
+    user_message = ("Enter recipe number, multiple comma-separated "
+                    "numbers, or nothing if done. \n")
+    input_str = input(user_message)
+    numbers = input_str.split(',')
+    try:
+        all_numbers.extend([int(n) for n in numbers])
+    except ValueError:
+        print('Bad input.')
+    return all_numbers
+
+
+def get_recipe_names_from_file():
+    recipes = []
+    for rp in glob.glob('recipes/*.yaml'):
+        try:
+            recipes.append(load_recipe(rp))
+        except Exception as e:
+            print(f'Failed to load recipe from {rp}:', repr(e), '\n')
+    get_name = lambda i : i.name
+    recipes = sorted(recipes, key=get_name)
+    return recipes
