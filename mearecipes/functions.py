@@ -1,9 +1,11 @@
 import glob
 from itertools import groupby
+import os
 import yaml
 
 from mearecipes.containers import Ingredient, Method, Recipe
 
+RECIPES_FOLDER = f'{os.path.dirname(os.path.abspath(__file__))}/recipes'
 
 def load_recipe(recipe_path):
     with open(recipe_path, 'r') as f:
@@ -18,7 +20,7 @@ def load_recipe(recipe_path):
 
 
 def store_recipe(recipe):
-    with open(f'recipes/{recipe.name}.yaml', 'w') as f:
+    with open(f'{RECIPES_FOLDER}/{recipe.name}.yaml', 'w') as f:
         store_dict = {
                 'name': recipe.name,
                 'ingredients': [x.to_dict() for x in recipe.ingredients],
@@ -52,7 +54,7 @@ def get_recipe_numbers_from_user():
 
 def get_recipe_names_from_file():
     recipes = []
-    for rp in glob.glob('recipes/*.yaml'):
+    for rp in glob.glob(f'{RECIPES_FOLDER}/*.yaml'):
         try:
             recipes.append(load_recipe(rp))
         except Exception as e:

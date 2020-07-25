@@ -2,6 +2,7 @@ README.md
 setup.py
 mearecipes/__init__.py
 mearecipes/containers.py
+mearecipes/functions.py
 mearecipes/main.py
 mearecipes.egg-info/PKG-INFO
 mearecipes.egg-info/SOURCES.txt

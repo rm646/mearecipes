@@ -1,4 +1,5 @@
 import click
+import os
 
 from mearecipes.functions import (
     load_recipe,
