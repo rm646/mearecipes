@@ -1,64 +1,13 @@
 import click
-import glob
-from itertools import groupby
-import yaml
+import os
 
-from mearecipes.containers import Ingredient, Method, Recipe
-
-
-def load_recipe(recipe_path):
-    with open(recipe_path, 'r') as f:
-        try:
-            content = yaml.safe_load(f)
-        except yaml.YAMLError as exc:
-            print(exc)
-    name = content['name']
-    ingredients = [
-        Ingredient(x, content['ingredients'][x]) for x in content['ingredients']
-    ]
-    method = Method(content['method'])
-    return Recipe(name, ingredients, method)
-
-
-def store_recipe(recipe):
-    with open(f'recipes/{recipe.name}.yaml', 'w') as f:
-        store_dict = {
-                'name': recipe.name,
-                'ingredients': [x.to_dict() for x in recipe.ingredients],
-                'method': recipe.method,
-        }
-        yaml.dump(store_dict, f, default_flow_style=False)
-
-
-def simplify_ingredients(ingredients):
-    get_name = lambda i : i.name
-    ingredients = sorted(ingredients, key=get_name)
-    simplified_ingredients = []
-    for name, group in groupby(ingredients, key=get_name):
-        quantities = [x.quantity for x in group]
-        simplified_ingredients.append(Ingredient(name, sum(quantities)))
-    return simplified_ingredients
-
-
-def get_recipe_numbers_from_user():
-    all_numbers = []
-    user_message = ("Enter recipe number, multiple comma-separated "
-                    "numbers, or nothing if done. \n")
-    input_str = input(user_message)
-    numbers = input_str.split(',')
-    try:
-        all_numbers.extend([int(n) for n in numbers])
-    except ValueError:
-        print('Bad input.')
-
-    return all_numbers
-
-
-def get_recipe_names_from_file():
-    recipes = [load_recipe(recipe) for recipe in glob.glob('recipes/*.yaml')]
-    get_name = lambda i : i.name
-    recipes = sorted(recipes, key=get_name)
-    return recipes
+from mearecipes.functions import (
+    load_recipe,
+    store_recipe,
+    simplify_ingredients,
+    get_recipe_numbers_from_user,
+    get_recipe_names_from_file,
+)
 
 
 @click.group(invoke_without_command=True)
@@ -66,7 +15,9 @@ def get_recipe_names_from_file():
 @click.version_option()
 def cli(ctx):
     if ctx.invoked_subcommand is None:
-        click.echo('Welcome to Mears recipes.')
+        click.echo(
+            'Use `mearecipes --help` for usage info.'
+        )
 
 @cli.command()
 def list():
@@ -101,4 +52,3 @@ def shop():
     for ingredient in simplified_ingredients:
         ingredients_str += f'\t- {str(ingredient)}\n'
     click.echo(ingredients_str)
-

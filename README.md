@@ -6,6 +6,21 @@ was tedious.
 This program tries to solve that problem by combining the ingredients of
 selected recipes into a shopping list.
 
+# installation
+
+You could clone the repository and install that:
+```
+git clone https://github.com/rm646/mearecipes.git
+cd mearecipes
+pip install -e .
+```
+Or you could try the version published on [TestPyPI](https://test.pypi.org/project/mearecipes/):
+```
+pip install -i https://test.pypi.org/simple/ mearecipes
+```
+
+# usage
+
 View the available recipes with
 ```bash
 $ mearecipes list
