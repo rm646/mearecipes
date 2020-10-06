@@ -15,7 +15,9 @@ from mearecipes.functions import (
 @click.version_option()
 def cli(ctx):
     if ctx.invoked_subcommand is None:
-        click.echo('Welcome to Mears recipes.')
+        click.echo(
+            'Use `mearecipes --help` for usage info.'
+        )
 
 @cli.command()
 def list():

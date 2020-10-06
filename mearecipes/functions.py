@@ -3,6 +3,8 @@ from itertools import groupby
 import os
 import yaml
 
+from astropy.units.core import UnitConversionError
+
 from mearecipes.containers import Ingredient, Method, Recipe
 
 RECIPES_FOLDER = f'{os.path.dirname(os.path.abspath(__file__))}/recipes'
@@ -31,11 +33,19 @@ def store_recipe(recipe):
 
 def simplify_ingredients(ingredients):
     get_name = lambda i : i.name
+    get_unit = lambda i : i.unit
     ingredients = sorted(ingredients, key=get_name)
     simplified_ingredients = []
     for name, group in groupby(ingredients, key=get_name):
         quantities = [x.quantity for x in group]
-        simplified_ingredients.append(Ingredient(name, sum(quantities)))
+        try:
+            simplified_ingredient = Ingredient(name, sum(quantities))
+            simplified_ingredients.append(simplified_ingredient)
+        except UnitConversionError:
+            for unit, unit_group in groupby(quantities, key=get_unit):
+                simplified_ingredient = Ingredient(name, sum(unit_group))
+                simplified_ingredients.append(simplified_ingredient)
+
     return simplified_ingredients
 
 
